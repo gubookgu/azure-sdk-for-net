@@ -5,6 +5,13 @@ _Release date: 2016.03.28_
 
 ### Feature Additions
 
+* Added new StorageFormat type OrcFormat type to copy files in ORC format.
+
+## Version 4.6.0
+_Release date: 2016.03.28_ 
+
+### Feature Additions
+
 * The following properties have been added to PipelineProperties: 
     * PipelineMode
     * ExpirationTime

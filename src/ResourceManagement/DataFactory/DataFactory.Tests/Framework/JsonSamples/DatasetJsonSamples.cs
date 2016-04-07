@@ -526,5 +526,34 @@ namespace DataFactory.Tests.Framework.JsonSamples
     }
 }
 ";
+
+        [JsonSample]
+        public const string BlobOrcFormatTable = @"
+{
+    name: ""MyDemoBlob"",
+    properties:
+    {
+        structure:
+        [
+            { name: ""PartitionKey"", type: ""Guid"" }
+        ],
+        location:
+        {
+            type: ""AzureBlob"",
+            folderPath: ""MyContainer\\MySubFolder\\$Date\\$Time\\FileName$Date$Time\\{PartitionKey}"",
+            fileName: ""TestBlobName"",
+            linkedServiceName: ""MyLinkedServiceName"",
+            format:
+            {
+                type: ""OrcFormat""
+            }
+        },
+        availability:
+        {
+            interval: 1, 
+            frequency: ""Hour""
+        }
+    }
+}";
     }
 }
