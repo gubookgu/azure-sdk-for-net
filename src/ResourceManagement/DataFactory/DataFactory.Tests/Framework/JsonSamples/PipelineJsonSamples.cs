@@ -1,4 +1,4 @@
-﻿// 
+﻿﻿// 
 // Copyright (c) Microsoft and contributors.  All rights reserved.
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -699,49 +699,49 @@ namespace DataFactory.Tests.Framework.JsonSamples
 ";
 
 
-//        [JsonSample("ExtraProperties")]
-//        public const string ExtraPropertiesPipeline = @"
-//{
-//    name: ""My machine learning pipeline"",
-//    properties: 
-//    {
-//        description : ""ML pipeline description"",
-//        hubName : ""someHub"",
-//        activities:
-//        [
-//            {
-//                name: ""MLActivity"",
-//                description: ""Test activity description"", 
-//                type: ""AzureMLBatchScoringActivity"",
-//                typeProperties: { 
-//                    extraProp1: ""extraValue1"", 
-//                    extraProp2: 5
-//                },
-//                inputs: 
-//                [ 
-//                    {
-//                        name: ""csvBlob""
-//                    }
-//                ],
-//                outputs: 
-//                [ 
-//                    {
-//                        name: ""sasCopyBlob""
-//                    }
-//                ],
-//                linkedServiceName: ""mlLinkedService"",
-//                policy:
-//                {
-//                    concurrency: 3,
-//                    executionPriorityOrder: ""NewestFirst"",
-//                    retry: 3,
-//                    timeout: ""00:00:05"",
-//                    delay: ""00:00:01""
-//                }
-//            }
-//        ]
-//    }
-//}";
+        //        [JsonSample("ExtraProperties")]
+        //        public const string ExtraPropertiesPipeline = @"
+        //{
+        //    name: ""My machine learning pipeline"",
+        //    properties: 
+        //    {
+        //        description : ""ML pipeline description"",
+        //        hubName : ""someHub"",
+        //        activities:
+        //        [
+        //            {
+        //                name: ""MLActivity"",
+        //                description: ""Test activity description"", 
+        //                type: ""AzureMLBatchScoringActivity"",
+        //                typeProperties: { 
+        //                    extraProp1: ""extraValue1"", 
+        //                    extraProp2: 5
+        //                },
+        //                inputs: 
+        //                [ 
+        //                    {
+        //                        name: ""csvBlob""
+        //                    }
+        //                ],
+        //                outputs: 
+        //                [ 
+        //                    {
+        //                        name: ""sasCopyBlob""
+        //                    }
+        //                ],
+        //                linkedServiceName: ""mlLinkedService"",
+        //                policy:
+        //                {
+        //                    concurrency: 3,
+        //                    executionPriorityOrder: ""NewestFirst"",
+        //                    retry: 3,
+        //                    timeout: ""00:00:05"",
+        //                    delay: ""00:00:01""
+        //                }
+        //            }
+        //        ]
+        //    }
+        //}";
 
         [JsonSample(propertyBagKeys: new string[]
                 {
@@ -1397,5 +1397,52 @@ namespace DataFactory.Tests.Framework.JsonSamples
     }
 }
 ";
+        [JsonSample]
+        public const string CopyOracleToOracle = @"
+{
+    name: ""MyPipelineName"",
+    properties:
+    {
+        description : ""Copy from Oracle to Oracle"",
+        activities:
+        [
+            {
+                type: ""Copy"",
+                name: ""MyActivityName"",
+                typeProperties:
+                {
+                    source: 
+                    {
+                        type: ""OracleSource"",
+                        sourceRetryCount: ""2"",
+                        sourceRetryWait: ""00:00:01"",
+                        oracleReaderQuery: ""$EncryptedString$MyEncryptedQuery""
+                    },
+                    sink: 
+                    {
+                        type: ""OracleSink"",
+                        writeBatchSize: 1000000,
+                        writeBatchTimeout: ""01:00:00"",
+                        sqlWriterCleanupScript: ""Script"",
+                        sliceIdentifierColumnName: ""SliceID""
+                    }
+                },
+                inputs: 
+                [ 
+                    {
+                        name: ""SourceOracle""
+                    }
+                ],
+                outputs: 
+                [ 
+                    {
+                        name: ""TargetOracle""
+                    }
+                ],
+                linkedServiceName: ""MyLinkedServiceName""
+            }
+        ]
+    }
+}";
     }
 }
