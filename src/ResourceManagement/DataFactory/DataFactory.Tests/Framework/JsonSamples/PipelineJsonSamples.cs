@@ -1164,5 +1164,53 @@ namespace DataFactory.Tests.Framework.JsonSamples
     }
 }
 ";
+
+        [JsonSample]
+        public const string CopyOracleToOracle = @"
+{
+    name: ""MyPipelineName"",
+    properties:
+    {
+        description : ""Copy from Oracle to Oracle"",
+        activities:
+        [
+            {
+                type: ""Copy"",
+                name: ""MyActivityName"",
+                typeProperties:
+                {
+                    source: 
+                    {
+                        type: ""OracleSource"",
+                        sourceRetryCount: ""2"",
+                        sourceRetryWait: ""00:00:01"",
+                        oracleReaderQuery: ""$EncryptedString$MyEncryptedQuery""
+                    },
+                    sink: 
+                    {
+                        type: ""OracleSink"",
+                        writeBatchSize: 1000000,
+                        writeBatchTimeout: ""01:00:00"",
+                        sqlWriterCleanupScript: ""Script"",
+                        sliceIdentifierColumnName: ""SliceID""
+                    }
+                },
+                inputs: 
+                [ 
+                    {
+                        name: ""SourceOracle""
+                    }
+                ],
+                outputs: 
+                [ 
+                    {
+                        name: ""TargetOracle""
+                    }
+                ],
+                linkedServiceName: ""MyLinkedServiceName""
+            }
+        ]
+    }
+}";
     }
 }
